@@ -4,6 +4,7 @@ import com.challenge.appgate.calc.operations.model.OperationResult;
 import com.challenge.appgate.calc.operations.model.operands.Operand;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SubCommand implements OperationCommand {
 
@@ -15,11 +16,11 @@ public class SubCommand implements OperationCommand {
 
     @Override
     public OperationResult execute() {
-        return new OperationResult(
-                operands.stream().reduce(
-                        new Operand(0.0),
-                        (accumulate, value) -> new Operand(accumulate.getValue() - value.getValue())
-                ).getValue()
+        Optional<Operand> result =  operands.stream().reduce(
+                (accumulate, value) -> new Operand(accumulate.getValue() - value.getValue())
         );
+
+        if (result.isPresent()) return new OperationResult(result.get().getValue());
+        throw new OperationFailExeption("After Operate result is empty");
     }
 }
