@@ -13,6 +13,8 @@ public class OperationFactory {
                 return new MultCommand(operands);
             case SUB:
                 return new SubCommand(operands);
+            case POW:
+                return new PowCommand(operands);
             default:
                 throw new OperationNotSupportedException(
                         String.format("The operation '%s' is not supported", operation)
