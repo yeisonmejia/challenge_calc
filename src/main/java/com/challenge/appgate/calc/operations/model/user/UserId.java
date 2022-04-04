@@ -8,6 +8,7 @@ public class UserId {
     private UUID value;
 
     public UserId(UUID userId) {
+        if (userId == null) throw new InvalidUserId("User id can not be null");
         this.value = userId;
     }
 
@@ -21,5 +22,9 @@ public class UserId {
 
     public UUID getValue() {
         return this.value;
+    }
+
+    public String getValueAsString() {
+        return value.toString();
     }
 }

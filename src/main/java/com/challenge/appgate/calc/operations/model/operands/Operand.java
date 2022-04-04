@@ -23,6 +23,7 @@ public class Operand {
 
     private void createOperand(String value, UserId userId, OperandId operandId) throws OperandBadFormatException {
         this.userId = userId;
+        this.operandId = operandId;
         try {
             this.value = Double.valueOf(value);
         } catch (NumberFormatException e) {
@@ -52,5 +53,9 @@ public class Operand {
 
     public UserId getUserId() {
         return userId;
+    }
+
+    public String getOperandIdAsString() {
+        return this.operandId.getValueAsString();
     }
 }

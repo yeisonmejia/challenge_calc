@@ -8,4 +8,8 @@ public class OperandId {
     public OperandId(UUID value) {
         this.value = value;
     }
+
+    public String getValueAsString() {
+        return this.value.toString();
+    }
 }

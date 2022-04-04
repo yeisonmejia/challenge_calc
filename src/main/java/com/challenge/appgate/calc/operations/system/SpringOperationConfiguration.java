@@ -1,0 +1,22 @@
+package com.challenge.appgate.calc.operations.system;
+
+import com.challenge.appgate.calc.operations.actions.OperationExecutor;
+import com.challenge.appgate.calc.operations.infrastructure.InMemoryOperandRespository;
+import com.challenge.appgate.calc.operations.model.operands.OperandRepository;
+import com.challenge.appgate.calc.operations.model.operands.OperandsFinder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SpringOperationConfiguration {
+    @Bean
+    public OperationExecutor operationExecutor(OperandsFinder operandsFinder) {
+        return new OperationExecutor(operandsFinder);
+    }
+
+    @Bean
+    public OperandsFinder operandsFinder(OperandRepository operandRepository) {
+        return new OperandsFinder(operandRepository);
+    }
+
+}

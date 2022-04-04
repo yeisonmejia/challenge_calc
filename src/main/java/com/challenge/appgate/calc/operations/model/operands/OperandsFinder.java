@@ -7,14 +7,14 @@ import java.util.List;
 
 public class OperandsFinder {
 
-    private UserRepository operandRepository;
+    private OperandRepository operandRepository;
 
-    public OperandsFinder(UserRepository operandRepository) {
+    public OperandsFinder(OperandRepository operandRepository) {
         this.operandRepository = operandRepository;
     }
 
     public List<Operand> findOperandsByUserId(UserId userId) {
-        List<Operand> operands = operandRepository.getOperandsByUserId();
+        List<Operand> operands = operandRepository.getOperandsByUserId(userId);
 
         if (operands == null || operands.size() <= 1) {
             throw new InvalidOperandsNumber("you need 2 operands to operate");

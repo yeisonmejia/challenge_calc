@@ -2,6 +2,7 @@ package com.challenge.appgate.calc.operations.model.user;
 
 import com.challenge.appgate.calc.operations.model.operators.OperationResult;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,9 +16,9 @@ public class User {
         this.lastResult = lastResult;
     }
 
-    public static User create(UUID userId) {
+    public static User create() {
         return new User(
-                new UserId(userId),
+                new UserId(UUID.randomUUID()),
                 Optional.empty()
                 );
     }
@@ -26,7 +27,12 @@ public class User {
         return userId;
     }
 
+    public String getUserIdAsString(){
+        return userId.getValue().toString();
+    }
+
     public Optional<OperationResult> getLastResult() {
         return lastResult;
     }
+
 }
