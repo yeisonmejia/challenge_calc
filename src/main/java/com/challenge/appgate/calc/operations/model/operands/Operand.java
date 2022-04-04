@@ -45,4 +45,12 @@ public class Operand {
     public Double getValue() {
         return value;
     }
+
+    public OperandId getOperandId() {
+        return operandId;
+    }
+
+    public UserId getUserId() {
+        return userId;
+    }
 }

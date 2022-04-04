@@ -22,7 +22,7 @@ public class OperationExecutor {
 
     public OperationResult executeOperation(String userIdParam, String operatorName) throws OperandBadFormatException {
         UserId userId = new UserId(userIdParam);
-        List<Operand> operands = operandsFinder.findOperandsByUserId(new UserId(userIdParam));
+        List<Operand> operands = operandsFinder.findOperandsByUserId(userId);
 
         OperatorEnum operator = OperatorEnum.valueOf(
                 operatorName.toUpperCase(Locale.ROOT)
