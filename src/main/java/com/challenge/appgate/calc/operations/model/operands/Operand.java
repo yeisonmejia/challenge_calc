@@ -1,21 +1,28 @@
 package com.challenge.appgate.calc.operations.model.operands;
 
+import com.challenge.appgate.calc.operations.model.user.UserId;
+
+import java.util.UUID;
+
 public class Operand {
+    private OperandId operandId;
+    private UserId userId;
     private Double value;
 
-    public Operand(Double value) throws OperandBadFormatException {
-        createOperand(String.valueOf(value));
+    public Operand(Double value, UserId userId, OperandId operandId) throws OperandBadFormatException {
+        createOperand(String.valueOf(value), userId, operandId);
     }
 
-    public Operand(Integer value) throws OperandBadFormatException {
-        createOperand(String.valueOf(value));
+    public Operand(Integer value, UserId userId, OperandId operandId) throws OperandBadFormatException {
+        createOperand(String.valueOf(value), userId, operandId);
     }
 
-    public Operand(String value) throws OperandBadFormatException {
-        createOperand(String.valueOf(value));
+    public Operand(String value, UserId userId, OperandId operandId) throws OperandBadFormatException {
+        createOperand(String.valueOf(value), userId, operandId);
     }
 
-    private void createOperand(String value) throws OperandBadFormatException {
+    private void createOperand(String value, UserId userId, OperandId operandId) throws OperandBadFormatException {
+        this.userId = userId;
         try {
             this.value = Double.valueOf(value);
         } catch (NumberFormatException e) {
@@ -23,16 +30,16 @@ public class Operand {
         }
     }
 
-    public static Operand create(int value) throws OperandBadFormatException {
-        return  new Operand(value);
+    public static Operand create(int value, UserId userId) throws OperandBadFormatException {
+        return  new Operand(value, userId, new OperandId(UUID.randomUUID()));
     }
 
-    public static Operand create(double value) throws OperandBadFormatException {
-        return  new Operand(value);
+    public static Operand create(double value, UserId userId) throws OperandBadFormatException {
+        return  new Operand(value, userId, new OperandId(UUID.randomUUID()));
     }
 
-    public static Operand create(String value) throws OperandBadFormatException {
-        return  new Operand(value);
+    public static Operand create(String value, UserId userId) throws OperandBadFormatException {
+        return  new Operand(value, userId, new OperandId(UUID.randomUUID()));
     }
 
     public Double getValue() {

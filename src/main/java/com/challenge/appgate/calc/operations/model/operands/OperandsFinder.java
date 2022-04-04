@@ -1,14 +1,15 @@
 package com.challenge.appgate.calc.operations.model.operands;
 
-import com.challenge.appgate.calc.operations.model.operators.UserId;
+import com.challenge.appgate.calc.operations.model.user.UserId;
+import com.challenge.appgate.calc.operations.model.user.UserRepository;
 
 import java.util.List;
 
 public class OperandsFinder {
 
-    private OperandRepository operandRepository;
+    private UserRepository operandRepository;
 
-    public OperandsFinder(OperandRepository operandRepository) {
+    public OperandsFinder(UserRepository operandRepository) {
         this.operandRepository = operandRepository;
     }
 

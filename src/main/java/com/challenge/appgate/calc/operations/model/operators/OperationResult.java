@@ -1,4 +1,4 @@
-package com.challenge.appgate.calc.operations.model;
+package com.challenge.appgate.calc.operations.model.operators;
 
 public class OperationResult {
     private Double value;

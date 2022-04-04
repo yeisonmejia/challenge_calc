@@ -1,6 +1,5 @@
 package com.challenge.appgate.calc.operations.model.operators;
 
-import com.challenge.appgate.calc.operations.model.OperationResult;
 import com.challenge.appgate.calc.operations.model.operands.Operand;
 
 import java.util.List;

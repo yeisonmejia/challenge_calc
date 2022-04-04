@@ -1,13 +1,13 @@
 package com.challenge.appgate.calc.operations.actions;
 
-import com.challenge.appgate.calc.operations.model.*;
 import com.challenge.appgate.calc.operations.model.operands.Operand;
 import com.challenge.appgate.calc.operations.model.operands.OperandBadFormatException;
 import com.challenge.appgate.calc.operations.model.operands.OperandsFinder;
 import com.challenge.appgate.calc.operations.model.operators.OperationCommand;
 import com.challenge.appgate.calc.operations.model.operators.OperationFactory;
+import com.challenge.appgate.calc.operations.model.operators.OperationResult;
 import com.challenge.appgate.calc.operations.model.operators.OperatorEnum;
-import com.challenge.appgate.calc.operations.model.operators.UserId;
+import com.challenge.appgate.calc.operations.model.user.UserId;
 
 import java.util.List;
 import java.util.Locale;
@@ -20,8 +20,9 @@ public class OperationExecutor {
         this.operandsFinder = operandsFinder;
     }
 
-    public OperationResult executeOperation(String userId, String operatorName) throws OperandBadFormatException {
-        List<Operand> operands = operandsFinder.findOperandsByUserId(new UserId(userId));
+    public OperationResult executeOperation(String userIdParam, String operatorName) throws OperandBadFormatException {
+        UserId userId = new UserId(userIdParam);
+        List<Operand> operands = operandsFinder.findOperandsByUserId(new UserId(userIdParam));
 
         OperatorEnum operator = OperatorEnum.valueOf(
                 operatorName.toUpperCase(Locale.ROOT)
