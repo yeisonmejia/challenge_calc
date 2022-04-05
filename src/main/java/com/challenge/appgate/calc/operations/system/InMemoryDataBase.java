@@ -27,7 +27,7 @@ public class InMemoryDataBase {
         return null;
     }
 
-    public Map<String, Double> findOperandByUserId(String userId) {
+    synchronized public Map<String, Double> findOperandByUserId(String userId) {
         for (Map.Entry<User, Map<String, Double>> entry : databaseUserOperands.entrySet()) {
             if (entry.getKey().getUserIdAsString().equals(userId)) return entry.getValue();
         }
