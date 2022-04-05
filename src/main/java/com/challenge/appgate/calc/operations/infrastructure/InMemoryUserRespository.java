@@ -5,8 +5,6 @@ import com.challenge.appgate.calc.operations.model.user.UserId;
 import com.challenge.appgate.calc.operations.model.user.UserRepository;
 import com.challenge.appgate.calc.operations.system.InMemoryDataBase;
 
-import java.util.HashMap;
-
 public class InMemoryUserRespository implements UserRepository {
     private InMemoryDataBase dataBase;
 
@@ -18,7 +16,7 @@ public class InMemoryUserRespository implements UserRepository {
 
     @Override
     public void save(User user) {
-        dataBase.insertUser(user, new HashMap<>());
+        dataBase.insertUser(user);
     }
 
     @Override

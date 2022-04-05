@@ -5,6 +5,7 @@ import com.challenge.appgate.calc.operations.model.operands.OperandBadFormatExce
 import com.challenge.appgate.calc.operations.model.operands.OperandsFinder;
 import com.challenge.appgate.calc.operations.model.operators.OperationResult;
 import com.challenge.appgate.calc.operations.model.user.UserId;
+import com.challenge.appgate.calc.operations.model.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,13 +26,15 @@ public class OperationExecutorTest {
 
     public OperationExecutor operationExecutor;
     public OperandsFinder operandsFinder;
+    public UserRepository userRepository;
     public String paramUserId;
 
     @BeforeEach
     void setUp() {
         operandsFinder = Mockito.mock(OperandsFinder.class);
-        operationExecutor = new OperationExecutor(operandsFinder);
+        operationExecutor = new OperationExecutor(operandsFinder, userRepository);
         paramUserId = UUID.randomUUID().toString();
+        userRepository = Mockito.mock(UserRepository.class);
     }
 
     @Test
@@ -60,7 +63,6 @@ public class OperationExecutorTest {
         List<Operand> operands = givenACreatedListOfOperands(25, 5);
         when(operandsFinder.findOperandsByUserId(any())).thenReturn(operands);
 
-        operationExecutor = new OperationExecutor(operandsFinder);
         OperationResult result = operationExecutor.executeOperation(
                 paramUserId,
                 "div"
@@ -74,7 +76,6 @@ public class OperationExecutorTest {
         List<Operand> operands = givenACreatedListOfOperands(5, 5);
         when(operandsFinder.findOperandsByUserId(any())).thenReturn(operands);
 
-        operationExecutor = new OperationExecutor(operandsFinder);
         OperationResult result = operationExecutor.executeOperation(
                 paramUserId,
                 "Mult"
@@ -88,7 +89,6 @@ public class OperationExecutorTest {
         List<Operand> operands = givenACreatedListOfOperands(20, 10);
         when(operandsFinder.findOperandsByUserId(any())).thenReturn(operands);
 
-        operationExecutor = new OperationExecutor(operandsFinder);
         OperationResult result = operationExecutor.executeOperation(
                 paramUserId,
                 "sub"
@@ -102,7 +102,6 @@ public class OperationExecutorTest {
         List<Operand> operands = givenACreatedListOfOperands(5, 3);
         when(operandsFinder.findOperandsByUserId(any())).thenReturn(operands);
 
-        operationExecutor = new OperationExecutor(operandsFinder);
         OperationResult result = operationExecutor.executeOperation(
                 paramUserId,
                 "pow"

@@ -20,8 +20,7 @@ public class InMemoryOperandRespository implements OperandRepository {
 
     @Override
     public void saveOperand(Operand operand) {
-        dataBase.findOperandByUserId(operand.getUserId().getValueAsString())
-                .put(operand.getOperandIdAsString(), operand.getValue());
+        dataBase.insertOperand(operand.getUserId(), operand);
     }
 
     @Override
