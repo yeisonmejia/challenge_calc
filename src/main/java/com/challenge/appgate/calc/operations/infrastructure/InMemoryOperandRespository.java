@@ -38,4 +38,9 @@ public class InMemoryOperandRespository implements OperandRepository {
         );
         return operands;
     }
+
+    @Override
+    public void flushOperands(UserId userId) {
+        dataBase.clearOperands(userId);
+    }
 }

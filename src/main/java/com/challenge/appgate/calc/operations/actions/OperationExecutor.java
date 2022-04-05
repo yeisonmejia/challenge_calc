@@ -3,6 +3,7 @@ package com.challenge.appgate.calc.operations.actions;
 import com.challenge.appgate.calc.operations.model.operands.Operand;
 import com.challenge.appgate.calc.operations.model.operands.OperandBadFormatException;
 import com.challenge.appgate.calc.operations.model.operands.OperandsFinder;
+import com.challenge.appgate.calc.operations.model.operands.OperandsFlush;
 import com.challenge.appgate.calc.operations.model.operators.OperationCommand;
 import com.challenge.appgate.calc.operations.model.operators.OperationFactory;
 import com.challenge.appgate.calc.operations.model.operators.OperationResult;
@@ -19,10 +20,12 @@ public class OperationExecutor {
 
     private OperandsFinder operandsFinder;
     private UserRepository userRepository;
+    private OperandsFlush operandsFlush;
 
-    public OperationExecutor(OperandsFinder operandsFinder, UserRepository userRepository) {
+    public OperationExecutor(OperandsFinder operandsFinder, UserRepository userRepository, OperandsFlush operandsFlush) {
         this.operandsFinder = operandsFinder;
         this.userRepository = userRepository;
+        this.operandsFlush = operandsFlush;
     }
 
     public OperationResult executeOperation(String userIdParam, String operatorName) throws OperandBadFormatException {
@@ -37,6 +40,13 @@ public class OperationExecutor {
                 operator,
                 operands.toArray(new Operand[operands.size()])
         );
+
+        OperationResult result = command.execute();
+        User user = new User(userId, Optional.of(result));
+        userRepository.save(user);
+
+        // hacer el flush
+        operandsFlush.invoke(userId);
 
         return command.execute();
     }

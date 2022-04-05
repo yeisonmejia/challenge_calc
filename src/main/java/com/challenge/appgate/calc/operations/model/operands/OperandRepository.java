@@ -7,4 +7,5 @@ import java.util.List;
 public interface OperandRepository {
     void saveOperand(Operand operand);
     List<Operand> getOperandsByUserId(UserId userId);
+    void flushOperands(UserId userId);
 }

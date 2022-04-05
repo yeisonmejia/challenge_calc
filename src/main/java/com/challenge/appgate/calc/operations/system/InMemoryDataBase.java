@@ -52,4 +52,12 @@ public class InMemoryDataBase {
         }
         return null;
     }
+
+    public void clearOperands(UserId userId) {
+        if (findUserById(userId.getValueAsString()) == null) {
+            throw new UserNotExistException("User does not exist");
+        }
+
+        operandsTable.put(userId.getValueAsString(), new HashMap<>());
+    }
 }

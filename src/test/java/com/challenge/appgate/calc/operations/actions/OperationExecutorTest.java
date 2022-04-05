@@ -3,6 +3,7 @@ package com.challenge.appgate.calc.operations.actions;
 import com.challenge.appgate.calc.operations.model.operands.Operand;
 import com.challenge.appgate.calc.operations.model.operands.OperandBadFormatException;
 import com.challenge.appgate.calc.operations.model.operands.OperandsFinder;
+import com.challenge.appgate.calc.operations.model.operands.OperandsFlush;
 import com.challenge.appgate.calc.operations.model.operators.OperationResult;
 import com.challenge.appgate.calc.operations.model.user.UserId;
 import com.challenge.appgate.calc.operations.model.user.UserRepository;
@@ -26,15 +27,17 @@ public class OperationExecutorTest {
 
     public OperationExecutor operationExecutor;
     public OperandsFinder operandsFinder;
+    public OperandsFlush operandsFlush;
     public UserRepository userRepository;
     public String paramUserId;
 
     @BeforeEach
     void setUp() {
-        operandsFinder = Mockito.mock(OperandsFinder.class);
-        operationExecutor = new OperationExecutor(operandsFinder, userRepository);
-        paramUserId = UUID.randomUUID().toString();
+        operandsFlush = Mockito.mock(OperandsFlush.class);
         userRepository = Mockito.mock(UserRepository.class);
+        operandsFinder = Mockito.mock(OperandsFinder.class);
+        operationExecutor = new OperationExecutor(operandsFinder, userRepository, operandsFlush);
+        paramUserId = UUID.randomUUID().toString();
     }
 
     @Test
